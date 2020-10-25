@@ -10,16 +10,47 @@ const Helpers = require('../../../util/helpers');
 exports.recharge = async (req, res, next) => {
 
 
-    ApiToken.find({
+    ApiToken.findOne({
             name: "qpin", tokenLife: {
-                    $gte: momment().add(10, 'minutes'),
+                    $gte: momment().add(10, 'minutes').toISOString(),
                 }
         },
-        function (err, docs) {
-            console.log(docs);
-            if (docs.length > 1) {
+        function (err, qpin) {
+            console.log(qpin);
+            if (qpin) {
 
+                var options2 = {
+                    method: 'POST',
+                    url: "https://api.qpin.ir/api/Recharge/TopupSubmit",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + qpin.token,
+                        'Accept': 'application/json',
+                    },
+                    body: {
+                        "mobileOperatorId": 2,
+                        "amount": 6000,
+                        "mobileNumber": "09360405004",
+                        "rechargeCode": 20,
+                        "clientTransactionId":  ''+momment().unix() *1000
+                    },
+                    json: true,
+                };
 
+                request(options2, function (error2, response2, body2) {
+
+                    if (error2){
+                        let resJson2 = Helpers.sendJson(0, "Recharge", [],
+                            error2.toString(), "Fail", []);
+                        return res.status(error2.statusCode).json(resJson2);
+                    }
+
+                    console.log(body2)
+                    let resJson2 = Helpers.sendJson(1, "Recharge", [],
+                       [], "Success", [body2]);
+                    return res.status(200).json(resJson2);
+
+                });
 
 
             } else {
@@ -41,9 +72,11 @@ exports.recharge = async (req, res, next) => {
 
                     // if (error) throw new Error(error);
 
-                    let resJson = Helpers.sendJson(0, "Recharge", [],
-                        error.toString(), "Fail", []);
-                    return res.status(error.statusCode).json(resJson);
+                    if (error){
+                        let resJson = Helpers.sendJson(0, "Recharge", [],
+                            error.toString(), "Fail", []);
+                        return res.status(error.statusCode).json(resJson);
+                    }
 
                     const apiToken = new ApiToken({
                         name: "qpin",
@@ -53,36 +86,46 @@ exports.recharge = async (req, res, next) => {
                     });
 
                     apiToken.save();
-
+console.log(body)
 
                     // res.status(200).json({apiToken});
 
                     var options2 = {
-                        method: 'GET',
-                        url: "https://31.24.236.150:8089/ESB.Api.ETCard.Ver1/api/etcard/1886005272133112",
+                        method: 'POST',
+                        url: "https://api.qpin.ir/api/Recharge/TopupSubmit",
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + body.result.token,
+                            'Authorization': 'Bearer ' + body.Result.accessToken,
                             'Accept': 'application/json',
                         },
-                        body: {},
+                        body: {
+                            "mobileOperatorId": 2,
+                            "amount": 6000,
+                            "mobileNumber": "09360405004",
+                            "rechargeCode": 20,
+                            "clientTransactionId": ''+momment().unix() *1000
+                        },
                         json: true,
                     };
 
                     request(options2, function (error2, response2, body2) {
 
-                        if (error2) throw new Error(error2);
-                        res.status(200).json({body: body2});
+                        if (error2){
+                            let resJson2 = Helpers.sendJson(0, "Recharge", [],
+                                error2.toString(), "Fail", []);
+                            return res.status(error2.statusCode).json(resJson2);
+                        }
+console.log(body2)
+                        let resJson2 = Helpers.sendJson(1, "Recharge", [],
+                            [], "Success", [body2]);
+                        return res.status(200).json(resJson2);
 
                     });
 
 
                 });
 
-                let response = Helpers.sendJson(0, "User", [],
-                    "شما در مدت دو ساعت بیش از 5 بار نمی توانید درخواست کد دهید.",
-                    "RequestCodeToo", []);
-                return res.status(200).json(response);
+
             }
         });
 

@@ -64,8 +64,8 @@ exports.auth = (req, res, next) => {
                     Sms.find({
                             userId: user._id, createdAt:
                                 {
-                                    $gte: momment().subtract(2, 'hours'),
-                                    $lte: momment()
+                                    $gte: momment().subtract(2, 'hours').toISOString(),
+                                    $lte: momment().toISOString()
                                 }
                         },
                         function (err, docs) {
@@ -105,7 +105,7 @@ exports.auth = (req, res, next) => {
 
                                     } else {
 
-                                        user.expireDate = momment().add(3, 'minutes');
+                                        user.expireDate = momment().add(3, 'minutes').toISOString();
                                         user.code = code;
                                         user.save();
 
@@ -159,7 +159,7 @@ exports.auth = (req, res, next) => {
                     const user = new User({
                         mobile: mobile,
                         code: code,
-                        expireDate: momment().add(3, 'minutes'),
+                        expireDate: momment().add(3, 'minutes').toISOString(),
                     });
 
                     user.save();
@@ -589,8 +589,8 @@ exports.repeatCode = (req, res, next) => {
                 Sms.find({
                     userId: user._id, createdAt:
                         {
-                            $gte: momment().subtract(2, 'hours'),
-                            $lte: momment()
+                            $gte: momment().subtract(2, 'hours').toISOString(),
+                            $lte: momment().toISOString()
                         }
                 }, function (err, docs) {
                     // console.log(docs);
@@ -636,7 +636,7 @@ exports.repeatCode = (req, res, next) => {
 
                             } else {
 
-                                user.expireDate = momment().add(3, 'minutes');
+                                user.expireDate = momment().add(3, 'minutes').toISOString();
                                 user.code = code;
                                 user.save();
 

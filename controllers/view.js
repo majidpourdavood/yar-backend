@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Role = require('../models/role');
 const Sms = require('../models/sms');
+const momment = require('jalali-moment');
 
 
 exports.deleteInfoMessage = (req, res, next) => {
@@ -17,6 +18,9 @@ exports.getIndex = async (req, res, next) => {
     // console.log(req.path);
     // console.log(req);
 
+  console.log(  momment().unix() *1000)
+  console.log(  momment().toISOString())
+  console.log(new Date())
     // const sms = new Sms({
     //     code: 234356,
     //     userId: "5f8b05e33962ba445a44f42d",

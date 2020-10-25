@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const apiTokenSchema = new Schema({
     name: {
         type: String
     },
@@ -26,6 +26,6 @@ const userSchema = new Schema({
 }, {timestamps: true});
 
 
-module.exports = mongoose.model('ApiToken', userSchema);
+module.exports = mongoose.model('ApiToken', apiTokenSchema);
 
 
