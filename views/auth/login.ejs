@@ -1,0 +1,121 @@
+<%- include('../includes/head.ejs') %>
+
+<%- include('../includes/navigation.ejs') %>
+
+<link rel="stylesheet" href="/css/login.css">
+
+<main>
+    <div class="container">
+
+
+        <div class="container">
+            <div class="row justify-content-center style_login_box">
+
+
+
+
+                <div class="row col-12 col-md-8 col-lg-6">
+                    <div class="row col-12">
+
+                        <% if (errorMessage) { %>
+                            <div class="row col-12 alert alert-danger alert-dismissible fade show mb-3" role="alert">
+
+                                    <%= errorMessage %>
+
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                            <% } %>
+                    </div>
+
+                    <div class="card col-12">
+                        <div class="card-header"> ورود به پنل کاربری
+                        </div>
+
+                        <div class="card-body">
+
+                            <form method="POST" action="/login" aria-label="Login">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <div class="form-group row">
+                                    <label for="mobile" class="col-sm-4 col-form-label text-md-right"> نام
+                                        کاربری</label>
+
+                                    <div class="col-md-6">
+                                        <input id="mobile" type="mobile" class="form-control" name="mobile" value=""
+                                               required="" autofocus="">
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">کلمه
+                                        عبور</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control" name="password"
+                                               required="">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6 offset-md-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="remember">
+                                                یادآوری کلمه عبور
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-8 offset-md-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            ورود
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="row col-12">-->
+        <!--<div class="col-9 offset-1">-->
+        <!--<div class="card  mr-auto ml-auto mt-5">-->
+        <!--<div class="card-header">-->
+        <!--ورود به پنل کاربری-->
+        <!--</div>-->
+        <!--<div class="card-body">-->
+
+        <!--<form class="login-form" action="/login" method="POST">-->
+        <!--<div class="form-group">-->
+        <!--<label for="email">E-Mail</label>-->
+        <!--<input class="form-control" type="email" name="email" id="email">-->
+        <!--</div>-->
+        <!--<input type="hidden" name="_csrf" value="<%= csrfToken %>">-->
+
+        <!--<div class="form-group">-->
+        <!--<label for="password">Password</label>-->
+        <!--<input class="form-control" type="password" name="password" id="password">-->
+        <!--</div>-->
+        <!--<button class="btn btn-info" type="submit">Login</button>-->
+        <!--</form>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+
+
+</main>
+<%- include('../includes/end.ejs') %>

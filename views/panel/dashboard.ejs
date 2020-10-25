@@ -1,0 +1,35 @@
+<%- include('../panel/includes/head.ejs') %>
+
+
+<div id="layoutSidenav">
+    <%- include('../panel/includes/navigation.ejs') %>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <ol class="breadcrumb breadcrumb-admin ">
+                    <li class="breadcrumb-item active">داشبورد</li>
+                </ol>
+
+                <div class="container">
+
+
+                </div>
+
+
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<%- include('../panel/includes/end.ejs') %>
+
+<script>
+
+    var user = $('#role').val();
+    console.log(user);
+    window.localStorage.setItem('role', user);
+
+
+</script>
