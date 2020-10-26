@@ -29,8 +29,8 @@ exports.recharge = async (req, res, next) => {
                     },
                     body: {
                         "mobileOperatorId": 2,
-                        "amount": 6000,
-                        "mobileNumber": "09360405004",
+                        "amount": 10000,
+                        "mobileNumber": "09117868034",
                         "rechargeCode": 20,
                         "clientTransactionId":  ''+momment().unix() *1000
                     },
@@ -100,8 +100,8 @@ console.log(body)
                         },
                         body: {
                             "mobileOperatorId": 2,
-                            "amount": 6000,
-                            "mobileNumber": "09360405004",
+                            "amount": 10000,
+                            "mobileNumber": "09117868034",
                             "rechargeCode": 20,
                             "clientTransactionId": ''+momment().unix() *1000
                         },
