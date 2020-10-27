@@ -7,6 +7,7 @@ const momment = require('jalali-moment');
 const User = require('../../../models/user');
 const Sms = require('../../../models/sms');
 const Helpers = require('../../../util/helpers');
+const request = require('request');
 
 
 exports.auth = (req, res, next) => {
@@ -75,75 +76,109 @@ exports.auth = (req, res, next) => {
 
                             if (docs.length < 6 || docs.length === 0) {
 
-                                    let expireDate = Math.round(momment(user.expireDate).diff(momment()) / 1000);
-                                    if (expireDate > 0) {
+                                let expireDate = Math.round(momment(user.expireDate).diff(momment()) / 1000);
+                                if (expireDate > 0) {
 
-                                        let userData = {
-                                            "mobile": user.mobile,
-                                            "expireDate": Math.round(momment(user.expireDate).diff(momment()) / 1000),
-                                            "token": "",
-                                            "expireToken": "",
-                                            "refreshToken": "",
-                                            "expireRefreshToken": "",
-                                            "name": user.name == null ? "" : user.name,
-                                            "lastName": user.lastName == null ? "" : user.lastName,
-                                        }
-                                        // let response = {
-                                        //     "status": 1,
-                                        //     "model": "User",
-                                        //     "errors": [],
-                                        //     "message": 'کد تایید قبلا به شماره موبایل شما ارسال شده است.',
-                                        //     "action" : "AlreadySendCode",
-                                        //     "data": [
-                                        //         userData
-                                        //     ]
-                                        // };
-
-                                        let response = Helpers.sendJson(1, "User", [], "کد تایید قبلا به شماره موبایل شما ارسال شده است.", "AlreadySendCode", [userData]);
-
-                                        return res.status(200).json(response);
-
-                                    } else {
-
-                                        user.expireDate = momment().add(3, 'minutes').toISOString();
-                                        user.code = code;
-                                        user.save();
-
-                                        console.log(user);
-
-                                        const sms = new Sms({
-                                            code: code,
-                                            userId: user._id,
-                                        });
-                                        sms.save();
-
-
-                                        let userData = {
-                                            "mobile": user.mobile,
-                                            "expireDate": Math.round(momment(user.expireDate).diff(momment()) / 1000),
-                                            "token": "",
-                                            "expireToken": "",
-                                            "refreshToken": "",
-                                            "expireRefreshToken": "",
-                                            "name": user.name == null ? "" : user.name,
-                                            "lastName": user.lastName == null ? "" : user.lastName,
-                                        };
-
-                                        // let response = {
-                                        //     "status": 1,
-                                        //     "model": "User",
-                                        //     "errors": [],
-                                        //     "message": 'کد تایید  به شماره موبایل شما ارسال شد.',
-                                        //     "action" : "SendCode",
-                                        //     "data": [
-                                        //         userData
-                                        //     ]
-                                        // };
-
-                                        let response = Helpers.sendJson(1, "User", [], "کد تایید  به شماره موبایل شما ارسال شد.", "SendCode", [userData]);
-
-                                        return res.status(200).json(response);
+                                    let userData = {
+                                        "mobile": user.mobile,
+                                        "expireDate": Math.round(momment(user.expireDate).diff(momment()) / 1000),
+                                        "token": "",
+                                        "expireToken": "",
+                                        "refreshToken": "",
+                                        "expireRefreshToken": "",
+                                        "name": user.name == null ? "" : user.name,
+                                        "lastName": user.lastName == null ? "" : user.lastName,
                                     }
+
+                                    // let response = {
+                                    //     "status": 1,
+                                    //     "model": "User",
+                                    //     "errors": [],
+                                    //     "message": 'کد تایید قبلا به شماره موبایل شما ارسال شده است.',
+                                    //     "action" : "AlreadySendCode",
+                                    //     "data": [
+                                    //         userData
+                                    //     ]
+                                    // };
+
+                                    let response = Helpers.sendJson(1, "User", [], "کد تایید قبلا به شماره موبایل شما ارسال شده است.", "AlreadySendCode", [userData]);
+
+                                    return res.status(200).json(response);
+
+                                } else {
+
+                                    user.expireDate = momment().add(3, 'minutes').toISOString();
+                                    user.code = code;
+                                    user.save();
+
+                                    console.log(user);
+
+                                    const sms = new Sms({
+                                        code: code,
+                                        userId: user._id,
+                                    });
+                                    sms.save();
+
+let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F796259414D4662683277325656696F3D";
+                                    let receptor = mobile;
+                                    let token = code;
+                                    let template = "verifyCodeYar";
+                                    let url = "https://api.kavenegar.com/v1/"+ tokenKavenegar +"/verify/lookup.json?receptor=" + receptor+ "&token="+ token  + "&template="+ template;
+
+
+                                    var options = {
+                                        method: 'POST',
+                                        url: url,
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Accept': 'application/json',
+                                        },
+                                        body:{},
+                                        json: true,
+                                    };
+
+                                    request(options, function (error, response, body) {
+
+                                        if (error) {
+                                            console.log(error)
+                                            // let resJson2 = Helpers.sendJson(0, "Recharge", [],
+                                            //     error2.toString(), "Fail", []);
+                                            // return res.status(error2.statusCode).json(resJson2);
+                                        }
+                                        console.log(body);
+                                        // let resJson2 = Helpers.sendJson(1, "Recharge", [],
+                                        //     [], "Success", [body2]);
+                                        // return res.status(200).json(resJson2);
+
+                                    });
+
+
+                                    let userData = {
+                                        "mobile": user.mobile,
+                                        "expireDate": Math.round(momment(user.expireDate).diff(momment()) / 1000),
+                                        "token": "",
+                                        "expireToken": "",
+                                        "refreshToken": "",
+                                        "expireRefreshToken": "",
+                                        "name": user.name == null ? "" : user.name,
+                                        "lastName": user.lastName == null ? "" : user.lastName,
+                                    };
+
+                                    // let response = {
+                                    //     "status": 1,
+                                    //     "model": "User",
+                                    //     "errors": [],
+                                    //     "message": 'کد تایید  به شماره موبایل شما ارسال شد.',
+                                    //     "action" : "SendCode",
+                                    //     "data": [
+                                    //         userData
+                                    //     ]
+                                    // };
+
+                                    let response = Helpers.sendJson(1, "User", [], "کد تایید  به شماره موبایل شما ارسال شد.", "SendCode", [userData]);
+
+                                    return res.status(200).json(response);
+                                }
 
 
                             } else {
@@ -154,7 +189,7 @@ exports.auth = (req, res, next) => {
                             }
                         });
 
-                }else {
+                } else {
 
                     const user = new User({
                         mobile: mobile,
@@ -169,6 +204,39 @@ exports.auth = (req, res, next) => {
                         userId: user._id,
                     });
                     sms.save();
+
+                    let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F796259414D4662683277325656696F3D";
+                    let receptor = mobile;
+                    let token = code;
+                    let template = "verifyCodeYar";
+                    let url = "https://api.kavenegar.com/v1/"+ tokenKavenegar +"/verify/lookup.json?receptor=" + receptor+ "&token="+ token  + "&template="+ template;
+
+                    var options = {
+                        method: 'POST',
+                        url: url,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                        },
+                        body:{},
+                        json: true,
+                    };
+
+                    request(options, function (error, response, body) {
+
+                        if (error) {
+                            console.log(error)
+                            // let resJson2 = Helpers.sendJson(0, "Recharge", [],
+                            //     error2.toString(), "Fail", []);
+                            // return res.status(error2.statusCode).json(resJson2);
+                        }
+                        console.log(body);
+                        // let resJson2 = Helpers.sendJson(1, "Recharge", [],
+                        //     [], "Success", [body2]);
+                        // return res.status(200).json(resJson2);
+
+                    });
+
 
                     let userData = {
                         "mobile": user.mobile,
@@ -325,7 +393,7 @@ exports.verifyCode = (req, res, next) => {
 
 
                     user.active = true;
-                    user.code = null;
+                    user.code = "";
                     user.save();
 
                     const token = jwt.sign(
@@ -646,6 +714,38 @@ exports.repeatCode = (req, res, next) => {
                                 });
                                 sms.save();
 
+
+                                let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F796259414D4662683277325656696F3D";
+                                let receptor = mobile;
+                                let token = code;
+                                let template = "verifyCodeYar";
+                                let url = "https://api.kavenegar.com/v1/"+ tokenKavenegar +"/verify/lookup.json?receptor=" + receptor+ "&token="+ token  + "&template="+ template;
+
+                                var options = {
+                                    method: 'POST',
+                                    url: url,
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json',
+                                    },
+                                    body:{},
+                                    json: true,
+                                };
+
+                                request(options, function (error, response, body) {
+
+                                    if (error) {
+                                        console.log(error)
+                                        // let resJson2 = Helpers.sendJson(0, "Recharge", [],
+                                        //     error2.toString(), "Fail", []);
+                                        // return res.status(error2.statusCode).json(resJson2);
+                                    }
+                                    console.log(body);
+                                    // let resJson2 = Helpers.sendJson(1, "Recharge", [],
+                                    //     [], "Success", [body2]);
+                                    // return res.status(200).json(resJson2);
+
+                                });
 
                                 let userData = {
                                     "mobile": user.mobile,

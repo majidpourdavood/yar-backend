@@ -12,8 +12,8 @@ exports.recharge = async (req, res, next) => {
 
     ApiToken.findOne({
             name: "qpin", tokenLife: {
-                    $gte: momment().add(10, 'minutes').toISOString(),
-                }
+                $gte: momment().add(10, 'minutes').toISOString(),
+            }
         },
         function (err, qpin) {
             console.log(qpin);
@@ -30,25 +30,58 @@ exports.recharge = async (req, res, next) => {
                     body: {
                         "mobileOperatorId": 2,
                         "amount": 10000,
-                        "mobileNumber": "09117868034",
+                        "mobileNumber": "09360405004",
                         "rechargeCode": 20,
-                        "clientTransactionId":  ''+momment().unix() *1000
+                        "clientTransactionId": '' + momment().unix() * 1000
                     },
                     json: true,
                 };
 
                 request(options2, function (error2, response2, body2) {
 
-                    if (error2){
+                    if (error2) {
                         let resJson2 = Helpers.sendJson(0, "Recharge", [],
                             error2.toString(), "Fail", []);
                         return res.status(error2.statusCode).json(resJson2);
                     }
 
-                    console.log(body2)
-                    let resJson2 = Helpers.sendJson(1, "Recharge", [],
-                       [], "Success", [body2]);
-                    return res.status(200).json(resJson2);
+
+                    if (response2.statusCode == 200) {
+                        var options3 = {
+                            method: 'POST',
+                            url: "https://api.qpin.ir/api/Recharge/TopupConfirm",
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + qpin.token,
+                                'Accept': 'application/json',
+                            },
+                            body: {
+                                "referenceNo": body2.Result.referenceNo,
+                            },
+                            json: true,
+                        };
+
+                        request(options3, function (error3, response3, body3) {
+
+                            if (error3) {
+                                let resJson3 = Helpers.sendJson(0, "Recharge", [],
+                                    error3.toString(), "Fail", []);
+                                return res.status(error3.statusCode).json(resJson3);
+                            }
+
+                            console.log(body3);
+
+                            if (response3.statusCode == 200) {
+
+                                let resJson3 = Helpers.sendJson(1, "Recharge", [],
+                                    [], "Success", [body3]);
+                                return res.status(200).json(resJson3);
+                            }
+
+
+                        });
+
+                    }
 
                 });
 
@@ -72,7 +105,7 @@ exports.recharge = async (req, res, next) => {
 
                     // if (error) throw new Error(error);
 
-                    if (error){
+                    if (error) {
                         let resJson = Helpers.sendJson(0, "Recharge", [],
                             error.toString(), "Fail", []);
                         return res.status(error.statusCode).json(resJson);
@@ -86,7 +119,7 @@ exports.recharge = async (req, res, next) => {
                     });
 
                     apiToken.save();
-console.log(body)
+                    console.log(body)
 
                     // res.status(200).json({apiToken});
 
@@ -101,24 +134,59 @@ console.log(body)
                         body: {
                             "mobileOperatorId": 2,
                             "amount": 10000,
-                            "mobileNumber": "09117868034",
+                            "mobileNumber": "09360405004",
                             "rechargeCode": 20,
-                            "clientTransactionId": ''+momment().unix() *1000
+                            "clientTransactionId": '' + momment().unix() * 1000
                         },
                         json: true,
                     };
 
                     request(options2, function (error2, response2, body2) {
 
-                        if (error2){
+                        if (error2) {
                             let resJson2 = Helpers.sendJson(0, "Recharge", [],
                                 error2.toString(), "Fail", []);
                             return res.status(error2.statusCode).json(resJson2);
                         }
-console.log(body2)
-                        let resJson2 = Helpers.sendJson(1, "Recharge", [],
-                            [], "Success", [body2]);
-                        return res.status(200).json(resJson2);
+
+
+                        if (response2.statusCode == 200) {
+                            var options3 = {
+                                method: 'POST',
+                                url: "https://api.qpin.ir/api/Recharge/TopupConfirm",
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': 'Bearer ' + body.Result.accessToken,
+                                    'Accept': 'application/json',
+                                },
+                                body: {
+                                    "referenceNo": body2.Result.referenceNo,
+                                },
+                                json: true,
+                            };
+
+                            request(options3, function (error3, response3, body3) {
+
+                                if (error3) {
+                                    let resJson3 = Helpers.sendJson(0, "Recharge", [],
+                                        error3.toString(), "Fail", []);
+                                    return res.status(error3.statusCode).json(resJson3);
+                                }
+
+                                console.log(body3)
+
+                                if (response3.statusCode == 200) {
+
+                                    let resJson3 = Helpers.sendJson(1, "Recharge", [],
+                                        [], "Success", [body3]);
+                                    return res.status(200).json(resJson3);
+                                }
+
+
+                            });
+
+                        }
+
 
                     });
 
@@ -128,8 +196,6 @@ console.log(body2)
 
             }
         });
-
-
 
 
 };

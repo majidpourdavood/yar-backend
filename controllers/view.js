@@ -17,10 +17,10 @@ exports.getIndex = async (req, res, next) => {
     // console.log(req.session.user.roles);
     // console.log(req.path);
     // console.log(req);'
-   await User.find({}, function (err, sms) {
-        return res.send(sms);
-
-    });
+   // await User.find({}, function (err, sms) {
+   //      return res.send(sms);
+   //
+   //  });
 
   console.log(  momment().unix() *1000)
   console.log(  momment().toISOString())

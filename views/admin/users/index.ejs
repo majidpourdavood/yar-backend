@@ -25,9 +25,10 @@
                                     <th scope="col">ردیف</th>
                                     <th scope="col">ای دی</th>
                                     <th scope="col" width="20%">موبایل</th>
-                                    <th scope="col" width="20%">ایمیل</th>
+                                    <th scope="col" >ایمیل</th>
+                                    <th scope="col">code</th>
                                     <th scope="col">تصویر</th>
-                                    <th scope="col" width="20%">توضیحات</th>
+                                    <th scope="col" >توضیحات</th>
                                     <th scope="col">وضعیت</th>
                                     <th scope="col" width="20%">تنظیمات</th>
                                 </tr>
@@ -41,6 +42,7 @@
                                         <td><%= user.id %></td>
                                         <td><%= user.mobile %></td>
                                         <td><%= user.email %></td>
+                                        <td><%= user.code %></td>
                                         <td>
                                             <a class="d-block" target="_blank" href="/<%= user.image %>">
                                             <img  class="rounded-circle img-fluid " src="/<%= user.image %>"

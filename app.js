@@ -99,7 +99,7 @@ app.use(
 
 //api route
 app.use('/api', authRouteApi);
-app.use('/payment', payment);
+app.use('/api', payment);
 app.use('/api', recharge);
 
 app.use(errorHandler);

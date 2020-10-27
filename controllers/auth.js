@@ -198,9 +198,11 @@ exports.postLogin = async (req, res, next) => {
                                         }
                                     });
                             });
+                        }else{
+                            req.flash('error', 'نام کاربری یا پسورد اشتباه است!!');
+                            res.redirect('/login');
                         }
-                        req.flash('error', 'نام کاربری یا پسورد اشتباه است!!');
-                        res.redirect('/login');
+
                     })
                     .catch(err => {
                         console.log(err);
