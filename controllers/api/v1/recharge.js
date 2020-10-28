@@ -9,6 +9,72 @@ const Helpers = require('../../../util/helpers');
 
 exports.recharge = async (req, res, next) => {
 
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+
+    //transfer cart to cart merchant to yargan
+    var data_body = JSON.stringify({
+        // "deposit_number": "0201255801006",
+        // "pan": "5029381014694897",
+        // "track2": "",
+        // "pin": "85509",
+        // "pin_type": "CARD",
+        // "cvv2": "927",
+        // "exp_date": "0107",
+
+        // "username": "yargan",
+        // "password": "Yy123456@",
+        // "client_id": "",
+
+        // "bill_id": "9399349604127",
+
+        "pan" : "5029381014694897",
+        "pin" : "85509",
+        "pin_type" : "CARD",
+        "cvv2" : "927",
+        "exp_date" : "0107",
+        "destination" : "",
+        "destination_pan" : "5029381014694905",
+        "amount" : 10000,
+        "track2" : "",
+        "receiver_name" : "",
+        "holder_transaction_id" : "9be21a78-c2af-4133-bf97-8c97ab78f2bf",
+        "merchant_id" : "",
+
+    });
+
+    var optionsCardsTransfer = {
+        method: 'POST',
+        url: 'https://api.sandbox.faraboom.co/v1/cards/transfer',
+        headers: {
+            "Accept-Language": "fa",
+            "App-Key": "13509",
+            "Device-Id": "192.168.1.1",
+            'Bank-Id': 'BOOMIR',
+            'Token-Id': "IWQIdD2rLDNOm0T0VrZyBbbiwNRhR0yBTWD1kWv6xykv0sqw3nIiyJfVjO10t3ZKjnERNyIOXzxPBd3R5FmCAgJM",
+            "CLIENT-DEVICE-ID": "121457845122222",
+            "CLIENT-IP-ADDRESS": "127.0.0.1",
+            "CLIENT-USER-AGENT": "android - Android 5.1 - Sumsung - Gallexy8",
+            "CLIENT-USER-ID": "09360405004",
+            "CLIENT-PLATFORM-TYPE": "ANDROID",
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(data_body)
+        },
+        body: data_body
+    };
+
+
+    request(optionsCardsTransfer, function (errorCardsTransfer, responseCardsTransfer, bodyCardsTransfer) {
+        // if (error) throw new Error(error);
+
+        res.status(200).send(JSON.parse(responseCardsTransfer.body));
+        console.log(errorCardsTransfer);
+        console.log(responseCardsTransfer);
+        console.log(body);
+
+    });
+
+
 
     ApiToken.findOne({
             name: "qpin", tokenLife: {

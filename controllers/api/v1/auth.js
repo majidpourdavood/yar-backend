@@ -55,7 +55,8 @@ exports.auth = (req, res, next) => {
         //     "data": []
         // };
 
-        let response = Helpers.sendJson(0, "User", errors, "خطا در اعتبارسنجی رخ داد!!", "ValidationError", []);
+        let response = Helpers.sendJson(0, "User", errors,
+            "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
         User.findOne({mobile: mobile})
@@ -101,7 +102,8 @@ exports.auth = (req, res, next) => {
                                     //     ]
                                     // };
 
-                                    let response = Helpers.sendJson(1, "User", [], "کد تایید قبلا به شماره موبایل شما ارسال شده است.", "AlreadySendCode", [userData]);
+                                    let response = Helpers.sendJson(1, "User", [],
+                                        "کد تایید قبلا به شماره موبایل شما ارسال شده است.", "AlreadySendCode", userData);
 
                                     return res.status(200).json(response);
 
@@ -119,11 +121,11 @@ exports.auth = (req, res, next) => {
                                     });
                                     sms.save();
 
-let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F796259414D4662683277325656696F3D";
+                                    let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F796259414D4662683277325656696F3D";
                                     let receptor = mobile;
                                     let token = code;
                                     let template = "verifyCodeYar";
-                                    let url = "https://api.kavenegar.com/v1/"+ tokenKavenegar +"/verify/lookup.json?receptor=" + receptor+ "&token="+ token  + "&template="+ template;
+                                    let url = "https://api.kavenegar.com/v1/" + tokenKavenegar + "/verify/lookup.json?receptor=" + receptor + "&token=" + token + "&template=" + template;
 
 
                                     var options = {
@@ -133,7 +135,7 @@ let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F79
                                             'Content-Type': 'application/json',
                                             'Accept': 'application/json',
                                         },
-                                        body:{},
+                                        body: {},
                                         json: true,
                                     };
 
@@ -175,7 +177,9 @@ let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F79
                                     //     ]
                                     // };
 
-                                    let response = Helpers.sendJson(1, "User", [], "کد تایید  به شماره موبایل شما ارسال شد.", "SendCode", [userData]);
+                                    let response = Helpers.sendJson(1, "User", [],
+                                        "کد تایید  به شماره موبایل شما ارسال شد.",
+                                        "SendCode", userData);
 
                                     return res.status(200).json(response);
                                 }
@@ -184,7 +188,7 @@ let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F79
                             } else {
                                 let response = Helpers.sendJson(0, "User", [],
                                     "شما در مدت دو ساعت بیش از 5 بار نمی توانید درخواست کد دهید.",
-                                    "RequestCodeToo", []);
+                                    "RequestCodeToo", {});
                                 return res.status(400).json(response);
                             }
                         });
@@ -209,7 +213,7 @@ let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F79
                     let receptor = mobile;
                     let token = code;
                     let template = "verifyCodeYar";
-                    let url = "https://api.kavenegar.com/v1/"+ tokenKavenegar +"/verify/lookup.json?receptor=" + receptor+ "&token="+ token  + "&template="+ template;
+                    let url = "https://api.kavenegar.com/v1/" + tokenKavenegar + "/verify/lookup.json?receptor=" + receptor + "&token=" + token + "&template=" + template;
 
                     var options = {
                         method: 'POST',
@@ -218,7 +222,7 @@ let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F79
                             'Content-Type': 'application/json',
                             'Accept': 'application/json',
                         },
-                        body:{},
+                        body: {},
                         json: true,
                     };
 
@@ -259,7 +263,8 @@ let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F79
                     //     ]
                     // };
 
-                    let response = Helpers.sendJson(1, "User", [], "کاربر ساخته شد به صفحه تایید کد می رویم.", "CreateUser", [userData]);
+                    let response = Helpers.sendJson(1, "User", [],
+                        "کاربر ساخته شد به صفحه تایید کد می رویم.", "CreateUser", userData);
 
                     return res.status(201).json(response);
                 }
@@ -277,7 +282,7 @@ let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F79
                     // };
 
                     let response = Helpers.sendJson(0, "User", [],
-                        err.toString(), "Fail2", []);
+                        err.toString(), "Fail", {});
 
                     return res.status(500).json(response);
                 }
@@ -291,7 +296,7 @@ let tokenKavenegar = "345A6B672F4F2F4D66396477586259314D387268425A6535522B422F79
                 //     "data": []
                 // };
                 let response = Helpers.sendJson(0, "User", [],
-                    err.toString(), "Fail", []);
+                    err.toString(), "Fail", {});
                 return res.status(err.statusCode).json(response);
                 // next(err);
             });
@@ -352,7 +357,8 @@ exports.verifyCode = (req, res, next) => {
         //     "data": []
         // };
 
-        let response = Helpers.sendJson(0, "User", errors, "خطا در اعتبارسنجی رخ داد!!", "ValidationError", []);
+        let response = Helpers.sendJson(0, "User", errors,
+            "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
         User.findOne({mobile: mobile, code: code})
@@ -386,7 +392,7 @@ exports.verifyCode = (req, res, next) => {
                     // };
 
                     let response = Helpers.sendJson(0, "User", [],
-                        "چنین کاربری وجود ندارد!", "NotExistUser", []);
+                        "چنین کاربری وجود ندارد!", "NotExistUser", {});
 
                     return res.status(404).json(response);
                 } else {
@@ -433,7 +439,7 @@ exports.verifyCode = (req, res, next) => {
                     // };
 
                     let response = Helpers.sendJson(1, "User", [],
-                        "کد تایید  درست است شما به اپلیکیشن وارد شدید.", "VerifyCode", [userData]);
+                        "کد تایید  درست است شما به اپلیکیشن وارد شدید.", "VerifyCode", userData);
 
                     return res.status(200).json(response);
 
@@ -471,13 +477,13 @@ exports.verifyCode = (req, res, next) => {
                     // };
 
                     let response = Helpers.sendJson(0, "User", [],
-                        err.toString(), "Fail", []);
+                        err.toString(), "Fail", {});
 
                     return res.status(500).json(response);
                 }
 
                 let response = Helpers.sendJson(0, "User", [],
-                    err.toString(), "Fail", []);
+                    err.toString(), "Fail", {});
                 return res.status(err.statusCode).json(response);
                 // next(err);
             });
@@ -515,7 +521,7 @@ exports.token = (req, res, next) => {
         }
 
         let response = Helpers.sendJson(0, "User",
-            errors, "خطا در اعتبارسنجی رخ داد!!", "ValidationError", []);
+            errors, "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
 
@@ -527,7 +533,7 @@ exports.token = (req, res, next) => {
         } catch (err) {
 
             let response = Helpers.sendJson(0, "User", [],
-                err.toString(), "Fail", []);
+                err.toString(), "Fail", {});
 
             return res.status(500).json(response);
         }
@@ -563,7 +569,7 @@ exports.token = (req, res, next) => {
                 };
 
                 let response = Helpers.sendJson(1, "User", [],
-                    "توکن با موفق دریافت شد.", "GetToken", [userData]);
+                    "توکن با موفق دریافت شد.", "GetToken", userData);
 
                 return res.status(200).json(response);
             });
@@ -648,7 +654,8 @@ exports.repeatCode = (req, res, next) => {
         //     "data": []
         // };
 
-        let response = Helpers.sendJson(0, "User", errors, "خطا در اعتبارسنجی رخ داد!!", "ValidationError", []);
+        let response = Helpers.sendJson(0, "User", errors,
+            "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
         User.findOne({mobile: mobile})
@@ -669,7 +676,7 @@ exports.repeatCode = (req, res, next) => {
                         if (!user) {
 
                             let response = Helpers.sendJson(0, "User", [],
-                                "چنین کاربری وجود ندارد!", "NotExistUser", []);
+                                "چنین کاربری وجود ندارد!", "NotExistUser", {});
 
                             return res.status(404).json(response);
 
@@ -698,7 +705,9 @@ exports.repeatCode = (req, res, next) => {
                                 //     ]
                                 // };
 
-                                let response = Helpers.sendJson(1, "User", [], "کد تایید قبلا به شماره موبایل شما ارسال شده است.", "AlreadySendCode", [userData]);
+                                let response = Helpers.sendJson(1, "User", [],
+                                    "کد تایید قبلا به شماره موبایل شما ارسال شده است.",
+                                    "AlreadySendCode", userData);
 
                                 return res.status(200).json(response);
 
@@ -719,7 +728,7 @@ exports.repeatCode = (req, res, next) => {
                                 let receptor = mobile;
                                 let token = code;
                                 let template = "verifyCodeYar";
-                                let url = "https://api.kavenegar.com/v1/"+ tokenKavenegar +"/verify/lookup.json?receptor=" + receptor+ "&token="+ token  + "&template="+ template;
+                                let url = "https://api.kavenegar.com/v1/" + tokenKavenegar + "/verify/lookup.json?receptor=" + receptor + "&token=" + token + "&template=" + template;
 
                                 var options = {
                                     method: 'POST',
@@ -728,7 +737,7 @@ exports.repeatCode = (req, res, next) => {
                                         'Content-Type': 'application/json',
                                         'Accept': 'application/json',
                                     },
-                                    body:{},
+                                    body: {},
                                     json: true,
                                 };
 
@@ -769,7 +778,8 @@ exports.repeatCode = (req, res, next) => {
                                 //     ]
                                 // };
 
-                                let response = Helpers.sendJson(1, "User", [], "کد تایید  به شماره موبایل شما ارسال شد.", "SendCode", [userData]);
+                                let response = Helpers.sendJson(1, "User", [],
+                                    "کد تایید  به شماره موبایل شما ارسال شد.", "SendCode", userData);
 
                                 return res.status(200).json(response);
                             }
@@ -778,7 +788,7 @@ exports.repeatCode = (req, res, next) => {
                     } else {
                         let response = Helpers.sendJson(0, "User", [],
                             "شما در مدت دو ساعت بیش از 5 بار نمی توانید درخواست کد دهید.",
-                            "RequestCodeToo", []);
+                            "RequestCodeToo", {});
                         return res.status(400).json(response);
                     }
                 });
@@ -807,7 +817,7 @@ exports.repeatCode = (req, res, next) => {
                     // };
 
                     let response = Helpers.sendJson(0, "User", [],
-                        err.toString(), "Fail", []);
+                        err.toString(), "Fail", {});
 
                     return res.status(500).json(response);
                 }
@@ -822,7 +832,7 @@ exports.repeatCode = (req, res, next) => {
                 // };
 
                 let response = Helpers.sendJson(0, "User", [],
-                    err.toString(), "Fail", []);
+                    err.toString(), "Fail", {});
                 return res.status(err.statusCode).json(response);
                 // next(err);
             });
