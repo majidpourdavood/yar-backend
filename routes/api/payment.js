@@ -3,6 +3,7 @@ const { body } = require('express-validator');
 
 const CardTransferController = require('../../controllers/api/v1/CardTransferController');
 const card = require('../../controllers/api/v1/card');
+const jwtMiddleware = require('../../middleware/api/is-auth');
 
 const router = express.Router();
 
@@ -12,6 +13,8 @@ router.get('/directChargeFaraboom', CardTransferController.directChargeFaraboom)
 router.get('/getEtcard', CardTransferController.getEtcard);
 
 
-router.post('/v1/balance', card.balance);
+router.post('/v1/balance',[jwtMiddleware], card.balance);
+router.post('/v1/cards-holder',[jwtMiddleware], card.cardsHolder);
+router.post('/v1/cards-transfer',[jwtMiddleware], card.cardsTransfer);
 
 module.exports = router;

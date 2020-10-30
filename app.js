@@ -19,6 +19,7 @@ const multer = require('multer');
 const authRouteApi = require('./routes/api/auth');
 const payment = require('./routes/api/payment');
 const recharge = require('./routes/api/recharge');
+const bill = require('./routes/api/bill');
 const errorHandler = require('./util/error-handler');
 
 require("dotenv").config({
@@ -100,6 +101,7 @@ app.use(
 //api route
 app.use('/api', authRouteApi);
 app.use('/api', payment);
+app.use('/api', bill);
 app.use('/api', recharge);
 
 app.use(errorHandler);
