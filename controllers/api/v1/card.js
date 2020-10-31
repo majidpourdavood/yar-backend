@@ -8,6 +8,8 @@ const User = require('../../../models/user');
 const ApiToken = require('../../../models/apiToken');
 const Helpers = require('../../../util/helpers');
 
+
+
 exports.cardsHolder = async (req, responseA, next) => {
 
     // console.log(req);
@@ -403,7 +405,6 @@ exports.balance = async (req, responseA, next) => {
     // console.log(req);
     console.log(req.mobile);
     console.log(req.headers.clientDeviceId);
-
 
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 

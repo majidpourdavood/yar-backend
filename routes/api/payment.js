@@ -17,4 +17,6 @@ router.post('/v1/balance',[jwtMiddleware], card.balance);
 router.post('/v1/cards-holder',[jwtMiddleware], card.cardsHolder);
 router.post('/v1/cards-transfer',[jwtMiddleware], card.cardsTransfer);
 
+// router.post('/v1/inquire-bill-pay',[jwtMiddleware], card.inquireBillPay);
+
 module.exports = router;
