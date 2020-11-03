@@ -75,7 +75,7 @@ exports.recharge = async (req, responseA, next) => {
                 errors.push(element);
             });
         }
-        let response = Helpers.sendJson(0, "Transaction", errors,
+        let response = Helpers.sendJson(0,  errors,
             "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
@@ -110,7 +110,7 @@ exports.recharge = async (req, responseA, next) => {
         //     console.log(response1);
         // } catch (error) {
         //     console.error(error);
-        //     let resJson = Helpers.sendJson(0, "Transaction", [],
+        //     let resJson = Helpers.sendJson(0,  [],
         //         error.toString(), "Fail1", {});
         //     return responseA.status(400).json(resJson);
         // }
@@ -155,7 +155,7 @@ exports.recharge = async (req, responseA, next) => {
         } catch (error) {
 
             console.error(error);
-            let resJson = Helpers.sendJson(0, "Transaction", error.response.data.errors,
+            let resJson = Helpers.sendJson(0,  error.response.data.errors,
                 "درخواست با خطا مواجه شد!", "Fail", {});
             return responseA.status(400).json(resJson);
         }
@@ -204,7 +204,7 @@ exports.recharge = async (req, responseA, next) => {
             } catch (error) {
 
                 console.error(error);
-                let resJson = Helpers.sendJson(0, "Transaction", error.response.data.errors,
+                let resJson = Helpers.sendJson(0,  error.response.data.errors,
                     "درخواست با خطا مواجه شد!", "Fail", {});
                 return responseA.status(400).json(resJson);
             }
@@ -243,8 +243,8 @@ exports.recharge = async (req, responseA, next) => {
                             request(options2, function (error2, response2, body2) {
 
                                 if (error2) {
-                                    let resJson2 = Helpers.sendJson(0, "Recharge", [],
-                                        error2.toString(), "Fail", []);
+                                    let resJson2 = Helpers.sendJson(0,  [],
+                                        error2.toString(), "Fail", {});
                                     return responseA.status(error2.statusCode).json(resJson2);
                                 }
 
@@ -267,8 +267,8 @@ exports.recharge = async (req, responseA, next) => {
                                     request(options3, function (error3, response3, body3) {
 
                                         if (error3) {
-                                            let resJson3 = Helpers.sendJson(0, "Recharge", [],
-                                                error3.toString(), "Fail", []);
+                                            let resJson3 = Helpers.sendJson(0, [],
+                                                error3.toString(), "Fail", {});
                                             return responseA.status(error3.statusCode).json(resJson3);
                                         }
 
@@ -276,8 +276,8 @@ exports.recharge = async (req, responseA, next) => {
 
                                         if (response3.statusCode == 200) {
 
-                                            let resJson3 = Helpers.sendJson(1, "Recharge", [],
-                                                [], "Success", [body3]);
+                                            let resJson3 = Helpers.sendJson(1,  [],
+                                                [], "Success", body3);
                                             return responseA.status(200).json(resJson3);
                                         }
 
@@ -309,8 +309,8 @@ exports.recharge = async (req, responseA, next) => {
                                 // if (error) throw new Error(error);
 
                                 if (error) {
-                                    let resJson = Helpers.sendJson(0, "Recharge", [],
-                                        error.toString(), "Fail", []);
+                                    let resJson = Helpers.sendJson(0,  [],
+                                        error.toString(), "Fail", {});
                                     return responseA.status(error.statusCode).json(resJson);
                                 }
 
@@ -347,8 +347,8 @@ exports.recharge = async (req, responseA, next) => {
                                 request(options2, function (error2, response2, body2) {
 
                                     if (error2) {
-                                        let resJson2 = Helpers.sendJson(0, "Recharge", [],
-                                            error2.toString(), "Fail", []);
+                                        let resJson2 = Helpers.sendJson(0,  [],
+                                            error2.toString(), "Fail", {});
                                         return responseA.status(error2.statusCode).json(resJson2);
                                     }
 
@@ -371,8 +371,8 @@ exports.recharge = async (req, responseA, next) => {
                                         request(options3, function (error3, response3, body3) {
 
                                             if (error3) {
-                                                let resJson3 = Helpers.sendJson(0, "Recharge", [],
-                                                    error3.toString(), "Fail", []);
+                                                let resJson3 = Helpers.sendJson(0,  [],
+                                                    error3.toString(), "Fail", {});
                                                 return responseA.status(error3.statusCode).json(resJson3);
                                             }
 
@@ -380,8 +380,8 @@ exports.recharge = async (req, responseA, next) => {
 
                                             if (response3.statusCode == 200) {
 
-                                                let resJson3 = Helpers.sendJson(1, "Recharge", [],
-                                                    [], "Success", [body3]);
+                                                let resJson3 = Helpers.sendJson(1,  [],
+                                                    [], "Success", body3);
                                                 return responseA.status(200).json(resJson3);
                                             }
 

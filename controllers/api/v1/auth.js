@@ -55,7 +55,7 @@ exports.auth = (req, res, next) => {
         //     "data": []
         // };
 
-        let response = Helpers.sendJson(0, "User", errors,
+        let response = Helpers.sendJson(0,  errors,
             "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
@@ -102,7 +102,7 @@ exports.auth = (req, res, next) => {
                                     //     ]
                                     // };
 
-                                    let response = Helpers.sendJson(1, "User", [],
+                                    let response = Helpers.sendJson(1,  [],
                                         "کد تایید قبلا به شماره موبایل شما ارسال شده است.", "AlreadySendCode", userData);
 
                                     return res.status(200).json(response);
@@ -143,12 +143,12 @@ exports.auth = (req, res, next) => {
 
                                         if (error) {
                                             console.log(error)
-                                            // let resJson2 = Helpers.sendJson(0, "Recharge", [],
+                                            // let resJson2 = Helpers.sendJson(0,  [],
                                             //     error2.toString(), "Fail", []);
                                             // return res.status(error2.statusCode).json(resJson2);
                                         }
                                         console.log(body);
-                                        // let resJson2 = Helpers.sendJson(1, "Recharge", [],
+                                        // let resJson2 = Helpers.sendJson(1,  [],
                                         //     [], "Success", [body2]);
                                         // return res.status(200).json(resJson2);
 
@@ -177,7 +177,7 @@ exports.auth = (req, res, next) => {
                                     //     ]
                                     // };
 
-                                    let response = Helpers.sendJson(1, "User", [],
+                                    let response = Helpers.sendJson(1,  [],
                                         "کد تایید  به شماره موبایل شما ارسال شد.",
                                         "SendCode", userData);
 
@@ -186,7 +186,7 @@ exports.auth = (req, res, next) => {
 
 
                             } else {
-                                let response = Helpers.sendJson(0, "User", [],
+                                let response = Helpers.sendJson(0,  [],
                                     "شما در مدت دو ساعت بیش از 5 بار نمی توانید درخواست کد دهید.",
                                     "RequestCodeToo", {});
                                 return res.status(400).json(response);
@@ -230,12 +230,12 @@ exports.auth = (req, res, next) => {
 
                         if (error) {
                             console.log(error)
-                            // let resJson2 = Helpers.sendJson(0, "Recharge", [],
+                            // let resJson2 = Helpers.sendJson(0, [],
                             //     error2.toString(), "Fail", []);
                             // return res.status(error2.statusCode).json(resJson2);
                         }
                         console.log(body);
-                        // let resJson2 = Helpers.sendJson(1, "Recharge", [],
+                        // let resJson2 = Helpers.sendJson(1,  [],
                         //     [], "Success", [body2]);
                         // return res.status(200).json(resJson2);
 
@@ -263,7 +263,7 @@ exports.auth = (req, res, next) => {
                     //     ]
                     // };
 
-                    let response = Helpers.sendJson(1, "User", [],
+                    let response = Helpers.sendJson(1,  [],
                         "کاربر ساخته شد به صفحه تایید کد می رویم.", "CreateUser", userData);
 
                     return res.status(201).json(response);
@@ -281,7 +281,7 @@ exports.auth = (req, res, next) => {
                     //     "data": []
                     // };
 
-                    let response = Helpers.sendJson(0, "User", [],
+                    let response = Helpers.sendJson(0,  [],
                         err.toString(), "Fail", {});
 
                     return res.status(500).json(response);
@@ -295,7 +295,7 @@ exports.auth = (req, res, next) => {
                 //     "action" : "Fail",
                 //     "data": []
                 // };
-                let response = Helpers.sendJson(0, "User", [],
+                let response = Helpers.sendJson(0,  [],
                     err.toString(), "Fail", {});
                 return res.status(err.statusCode).json(response);
                 // next(err);
@@ -357,7 +357,7 @@ exports.verifyCode = (req, res, next) => {
         //     "data": []
         // };
 
-        let response = Helpers.sendJson(0, "User", errors,
+        let response = Helpers.sendJson(0,  errors,
             "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
@@ -391,7 +391,7 @@ exports.verifyCode = (req, res, next) => {
                     //     ]
                     // };
 
-                    let response = Helpers.sendJson(0, "User", [],
+                    let response = Helpers.sendJson(0,  [],
                         "چنین کاربری وجود ندارد!", "NotExistUser", {});
 
                     return res.status(404).json(response);
@@ -438,7 +438,7 @@ exports.verifyCode = (req, res, next) => {
                     //     ]
                     // };
 
-                    let response = Helpers.sendJson(1, "User", [],
+                    let response = Helpers.sendJson(1,  [],
                         "کد تایید  درست است شما به اپلیکیشن وارد شدید.", "VerifyCode", userData);
 
                     return res.status(200).json(response);
@@ -446,7 +446,7 @@ exports.verifyCode = (req, res, next) => {
 
                 }
                 //     }else{
-                //         let response = Helpers.sendJson(0, "User", [],
+                //         let response = Helpers.sendJson(0, [],
                 //             "شما در مدت دو ساعت بیش از 5 بار نمی توانید درخواست کد دهید.",
                 //             "RequestCodeToo", []);
                 //         return res.status(400).json(response);
@@ -476,13 +476,13 @@ exports.verifyCode = (req, res, next) => {
                     //     "data": []
                     // };
 
-                    let response = Helpers.sendJson(0, "User", [],
+                    let response = Helpers.sendJson(0,  [],
                         err.toString(), "Fail", {});
 
                     return res.status(500).json(response);
                 }
 
-                let response = Helpers.sendJson(0, "User", [],
+                let response = Helpers.sendJson(0,  [],
                     err.toString(), "Fail", {});
                 return res.status(err.statusCode).json(response);
                 // next(err);
@@ -520,7 +520,7 @@ exports.token = (req, res, next) => {
             });
         }
 
-        let response = Helpers.sendJson(0, "User",
+        let response = Helpers.sendJson(0,
             errors, "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
@@ -532,7 +532,7 @@ exports.token = (req, res, next) => {
             decodedToken = jwt.verify(req.body.refreshToken, process.env.REFRESH_TOKEN_SECRET);
         } catch (err) {
 
-            let response = Helpers.sendJson(0, "User", [],
+            let response = Helpers.sendJson(0,  [],
                 err.toString(), "Fail", {});
 
             return res.status(500).json(response);
@@ -568,7 +568,7 @@ exports.token = (req, res, next) => {
                     "lastName": user.lastName == null ? "" : user.lastName,
                 };
 
-                let response = Helpers.sendJson(1, "User", [],
+                let response = Helpers.sendJson(1,  [],
                     "توکن با موفق دریافت شد.", "GetToken", userData);
 
                 return res.status(200).json(response);
@@ -654,7 +654,7 @@ exports.repeatCode = (req, res, next) => {
         //     "data": []
         // };
 
-        let response = Helpers.sendJson(0, "User", errors,
+        let response = Helpers.sendJson(0,  errors,
             "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
@@ -675,7 +675,7 @@ exports.repeatCode = (req, res, next) => {
                     if (docs.length < 6 || docs.length === 0) {
                         if (!user) {
 
-                            let response = Helpers.sendJson(0, "User", [],
+                            let response = Helpers.sendJson(0,  [],
                                 "چنین کاربری وجود ندارد!", "NotExistUser", {});
 
                             return res.status(404).json(response);
@@ -705,7 +705,7 @@ exports.repeatCode = (req, res, next) => {
                                 //     ]
                                 // };
 
-                                let response = Helpers.sendJson(1, "User", [],
+                                let response = Helpers.sendJson(1,  [],
                                     "کد تایید قبلا به شماره موبایل شما ارسال شده است.",
                                     "AlreadySendCode", userData);
 
@@ -745,12 +745,12 @@ exports.repeatCode = (req, res, next) => {
 
                                     if (error) {
                                         console.log(error)
-                                        // let resJson2 = Helpers.sendJson(0, "Recharge", [],
+                                        // let resJson2 = Helpers.sendJson(0,  [],
                                         //     error2.toString(), "Fail", []);
                                         // return res.status(error2.statusCode).json(resJson2);
                                     }
                                     console.log(body);
-                                    // let resJson2 = Helpers.sendJson(1, "Recharge", [],
+                                    // let resJson2 = Helpers.sendJson(1,  [],
                                     //     [], "Success", [body2]);
                                     // return res.status(200).json(resJson2);
 
@@ -778,7 +778,7 @@ exports.repeatCode = (req, res, next) => {
                                 //     ]
                                 // };
 
-                                let response = Helpers.sendJson(1, "User", [],
+                                let response = Helpers.sendJson(1,  [],
                                     "کد تایید  به شماره موبایل شما ارسال شد.", "SendCode", userData);
 
                                 return res.status(200).json(response);
@@ -786,7 +786,7 @@ exports.repeatCode = (req, res, next) => {
 
                         }
                     } else {
-                        let response = Helpers.sendJson(0, "User", [],
+                        let response = Helpers.sendJson(0,  [],
                             "شما در مدت دو ساعت بیش از 5 بار نمی توانید درخواست کد دهید.",
                             "RequestCodeToo", {});
                         return res.status(400).json(response);
@@ -816,7 +816,7 @@ exports.repeatCode = (req, res, next) => {
                     //     "data": []
                     // };
 
-                    let response = Helpers.sendJson(0, "User", [],
+                    let response = Helpers.sendJson(0,  [],
                         err.toString(), "Fail", {});
 
                     return res.status(500).json(response);
@@ -831,7 +831,7 @@ exports.repeatCode = (req, res, next) => {
                 //     "data": []
                 // };
 
-                let response = Helpers.sendJson(0, "User", [],
+                let response = Helpers.sendJson(0,  [],
                     err.toString(), "Fail", {});
                 return res.status(err.statusCode).json(response);
                 // next(err);

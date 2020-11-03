@@ -57,7 +57,7 @@ exports.cardsHolder = async (req, responseA, next) => {
         }
 
 
-        let response = Helpers.sendJson(0, "Transaction", errors,
+        let response = Helpers.sendJson(0,  errors,
             "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
@@ -92,7 +92,7 @@ exports.cardsHolder = async (req, responseA, next) => {
         //     console.log(response1);
         // } catch (error) {
         //     console.error(error);
-        //     let resJson = Helpers.sendJson(0, "Transaction", [],
+        //     let resJson = Helpers.sendJson(0,  [],
         //         error.toString(), "Fail1", {});
         //     return responseA.status(400).json(resJson);
         // }
@@ -145,7 +145,7 @@ exports.cardsHolder = async (req, responseA, next) => {
         } catch (error) {
 
             console.error(error);
-            let resJson = Helpers.sendJson(0, "Transaction", error.response.data.errors,
+            let resJson = Helpers.sendJson(0,  error.response.data.errors,
                 "درخواست با خطا مواجه شد!", "Fail", {});
             return responseA.status(400).json(resJson);
         }
@@ -153,7 +153,7 @@ exports.cardsHolder = async (req, responseA, next) => {
 
         let responseData = response.data;
 
-        let resJson = Helpers.sendJson(1, "Transaction", [],
+        let resJson = Helpers.sendJson(1,  [],
             "success", "success", responseData);
         return responseA.status(200).json(resJson);
 
@@ -197,7 +197,7 @@ exports.cardsHolder = async (req, responseA, next) => {
     //
     // };
     //
-    // let resJson = Helpers.sendJson(0, "Transaction", [],
+    // let resJson = Helpers.sendJson(0,  [],
     //     error.toString(), "Fail", responseData);
     // return responseA.status(200).json(resJson);
 
@@ -250,7 +250,7 @@ exports.cardsTransfer = async (req, responseA, next) => {
         }
 
 
-        let response = Helpers.sendJson(0, "Transaction", errors,
+        let response = Helpers.sendJson(0,  errors,
             "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
@@ -285,7 +285,7 @@ exports.cardsTransfer = async (req, responseA, next) => {
         //     console.log(response1);
         // } catch (error) {
         //     console.error(error);
-        //     let resJson = Helpers.sendJson(0, "Transaction", [],
+        //     let resJson = Helpers.sendJson(0,  [],
         //         error.toString(), "Fail1", {});
         //     return responseA.status(400).json(resJson);
         // }
@@ -340,7 +340,7 @@ exports.cardsTransfer = async (req, responseA, next) => {
         } catch (error) {
 
             console.error(error);
-            let resJson = Helpers.sendJson(0, "Transaction", error.response.data.errors,
+            let resJson = Helpers.sendJson(0,  error.response.data.errors,
                 "درخواست با خطا مواجه شد!", "Fail", {});
             return responseA.status(400).json(resJson);
         }
@@ -348,7 +348,7 @@ exports.cardsTransfer = async (req, responseA, next) => {
 
         let responseData = response.data;
 
-        let resJson = Helpers.sendJson(1, "Transaction", [],
+        let resJson = Helpers.sendJson(1,  [],
             "success", "success", responseData);
         return responseA.status(200).json(resJson);
 
@@ -392,7 +392,7 @@ exports.cardsTransfer = async (req, responseA, next) => {
     //
     // };
     //
-    // let resJson = Helpers.sendJson(0, "Transaction", [],
+    // let resJson = Helpers.sendJson(0,  [],
     //     error.toString(), "Fail", responseData);
     // return responseA.status(200).json(resJson);
 
@@ -446,7 +446,7 @@ exports.balance = async (req, responseA, next) => {
         }
 
 
-        let response = Helpers.sendJson(0, "Transaction", errors,
+        let response = Helpers.sendJson(0,  errors,
             "خطا در اعتبارسنجی رخ داد!!", "ValidationError", {});
         return res.status(400).json(response);
     } else {
@@ -481,7 +481,7 @@ exports.balance = async (req, responseA, next) => {
         //     console.log(response1);
         // } catch (error) {
         //     console.error(error);
-        //     let resJson = Helpers.sendJson(0, "Transaction", [],
+        //     let resJson = Helpers.sendJson(0,  [],
         //         error.toString(), "Fail1", {});
         //     return responseA.status(400).json(resJson);
         // }
@@ -532,7 +532,7 @@ exports.balance = async (req, responseA, next) => {
         } catch (error) {
 
             console.error(error);
-            let resJson = Helpers.sendJson(0, "Transaction", [],
+            let resJson = Helpers.sendJson(0,  [],
                 error.toString(), "Fail", {});
             return responseA.status(400).json(resJson);
         }
@@ -540,7 +540,7 @@ exports.balance = async (req, responseA, next) => {
 
         let responseData = response.data;
 
-        let resJson = Helpers.sendJson(1, "Transaction", [],
+        let resJson = Helpers.sendJson(1, [],
             "success", "success", responseData);
         return responseA.status(200).json(resJson);
 
@@ -584,7 +584,7 @@ exports.balance = async (req, responseA, next) => {
     //
     // };
     //
-    // let resJson = Helpers.sendJson(0, "Transaction", [],
+    // let resJson = Helpers.sendJson(0,  [],
     //     error.toString(), "Fail", responseData);
     // return responseA.status(200).json(resJson);
 

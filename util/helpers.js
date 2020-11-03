@@ -1,9 +1,8 @@
 const User = require('../models/user');
 
-function sendJson(status, model, errors, message, action, data) {
+function sendJson(status, errors, message, action, data) {
     let response = {
         "status": status,
-        "model": model ,
         "errors": errors,
         "message":  message ,
         "action":  action ,
