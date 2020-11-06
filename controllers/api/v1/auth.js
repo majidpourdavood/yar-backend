@@ -10,6 +10,18 @@ const Helpers = require('../../../util/helpers');
 const request = require('request');
 
 
+
+// "data": {
+//     "mobile": "09360405004",
+//         "expireDate": 145,
+//         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtb2JpbGUiOiIwOTM2MDQwNTAwNCIsInVzZXJJZCI6IjVmODllMjI3MzAwYzVjMmJmY2MxM2NmYyIsImlhdCI6MTYwNDY2Njk5MywiZXhwIjoxNjA1MjcxNzkzfQ.FvmSg43jmD3bkvVX0ydtOHXnyfCR-RelZr9EIa-mUvQ",
+//         "expireToken": "604800000",
+//         "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtb2JpbGUiOiIwOTM2MDQwNTAwNCIsInVzZXJJZCI6IjVmODllMjI3MzAwYzVjMmJmY2MxM2NmYyIsImlhdCI6MTYwNDY2Njk5MywiZXhwIjoxNjA3MjU4OTkzfQ.5dwL9bx5POp4uFZkwQGSLFd4tmU67e0AnVsrVFBpAv0",
+//         "expireRefreshToken": "2592000000",
+//         "name": "",
+//         "lastName": ""
+// }
+
 exports.auth = (req, res, next) => {
 
 
